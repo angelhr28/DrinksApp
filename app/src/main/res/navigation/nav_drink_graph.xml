@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_drink_graph.xml"
+    app:startDestination="@id/drinksFragment">
+
+    <fragment
+        android:id="@+id/drinksFragment"
+        android:name="com.example.mydrinksapp.ui.view.screen.fragment.DrinksFragment"
+        android:label="Recetas"
+        tools:layout="@layout/fragment_drinks">
+        <action
+            android:id="@+id/action_drinksFragment_to_detailDrinkFragment"
+            app:destination="@id/detailDrinkFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailDrinkFragment"
+        android:name="com.example.mydrinksapp.ui.view.screen.fragment.DrinkDetailFragment"
+        android:label="Detalle de la bebida"
+        tools:layout="@layout/fragment_detail_drink">
+        <argument
+            android:name="drinkId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_detailDrinkFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.example.mydrinksapp.ui.view.screen.fragment.MapsFragment"
+        android:label="Ubicacion de la bebida"
+        tools:layout="@layout/fragment_maps" >
+        <argument
+            android:name="address"
+            app:argType="com.example.mydrinksapp.domain.model.Address" />
+
+        <argument
+            android:name="name"
+            app:argType="string" />
+    </fragment>
+
+</navigation>

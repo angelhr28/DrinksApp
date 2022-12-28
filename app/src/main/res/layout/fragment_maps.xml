@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.view.screen.MapsFragment">
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.view.screen.fragment.MapsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/map"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        map:cameraTargetLat="-12.046374"
+        map:cameraTargetLng="-77.042793"
+        map:cameraZoom="16"
+        map:uiCompass="false"
+        map:uiRotateGestures="true"
+        map:uiTiltGestures="true"
+        map:uiZoomGestures="true"
+        tools:context=".MapsActivity" />
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

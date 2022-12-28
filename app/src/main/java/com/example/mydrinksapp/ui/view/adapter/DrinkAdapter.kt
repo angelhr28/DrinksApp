@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mydrinksapp.domain.model.Drink
 import com.example.mydrinksapp.ui.view.viewholder.ItemCardViewHolder
 
-class DrinkAdapter(private val listener: (String) -> Unit) :
+class DrinkAdapter(private val listener: (Int) -> Unit) :
     RecyclerView.Adapter<ItemCardViewHolder>() {
 
     private var items: MutableList<Drink> = mutableListOf()

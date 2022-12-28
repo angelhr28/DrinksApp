@@ -4,7 +4,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mydrinksapp.domain.model.Drink
+import com.example.mydrinksapp.domain.model.DrinkDetail
 import com.example.mydrinksapp.domain.usecase.DeleteDrinkUseCase
+import com.example.mydrinksapp.domain.usecase.GetDrinkByIdUseCase
 import com.example.mydrinksapp.domain.usecase.GetDrinksUseCase
 import com.example.mydrinksapp.domain.usecase.GetRefreshDrinkUseCase
 import com.example.mydrinksapp.domain.usecase.SearchDrinkUseCase
@@ -17,7 +19,8 @@ class DrinkViewModel @Inject constructor(
     private val getDrinksUseCase: GetDrinksUseCase,
     private val getRefreshDrinkUseCase: GetRefreshDrinkUseCase,
     private val deleteDrinksUseCase: DeleteDrinkUseCase,
-    private val searchDrinksUSSeCase: SearchDrinkUseCase
+    private val searchDrinksUSSeCase: SearchDrinkUseCase,
+    private val getDrinkByIdUseCase: GetDrinkByIdUseCase
 ) : ViewModel() {
 
     val isRefresh = MutableLiveData<Boolean>()
@@ -25,6 +28,7 @@ class DrinkViewModel @Inject constructor(
     val snackbar = MutableLiveData<String>()
     val drinkModel = MutableLiveData<List<Drink>>()
     val isEmpty = MutableLiveData<Boolean>()
+    val detail = MutableLiveData<DrinkDetail>()
 
     fun getDrinks() {
         viewModelScope.launch {
@@ -76,6 +80,17 @@ class DrinkViewModel @Inject constructor(
             }
             isProgress.postValue(false)
 
+        }
+    }
+
+    fun getDrinkDetail(drinkId: Int) {
+        viewModelScope.launch {
+            try {
+                val drinkDetail =  getDrinkByIdUseCase(drinkId)
+                detail.postValue(drinkDetail)
+            } catch (e: Exception) {
+                snackbar.postValue("Sin resultados")
+            }
         }
     }
 
