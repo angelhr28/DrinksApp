@@ -1,5 +1,6 @@
 package com.example.mydrinksapp.data
 
+import android.util.Log
 import com.example.mydrinksapp.data.database.dao.DrinkDao
 import com.example.mydrinksapp.data.database.dao.IngredientDao
 import com.example.mydrinksapp.data.database.entities.DrinkEntity
@@ -20,9 +21,7 @@ class DrinkRepository @Inject constructor(
 
     suspend fun getAllDrinks(): List<Drink> {
         val drinks = getAllDrinksFromDatabase()
-
         if (drinks.isNotEmpty()) return drinks
-
         return getAllDrinksFromApi()
     }
 

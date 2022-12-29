@@ -22,7 +22,15 @@ interface DrinkDao {
     @Query("DELETE FROM drinks_table WHERE id = :id")
     suspend fun deleteById(id: Int)
 
-    @Query("SELECT * FROM drinks_table WHERE name like '%'|| :search ||'%'")
+    @Query(
+        """
+        SELECT d.* 
+        FROM drinks_table AS d
+        INNER JOIN ingredients_table AS i ON d.id = i.drink_id
+        WHERE d.name like '%'|| :search ||'%'
+        OR i.name like '%'|| :search ||'%'
+        """
+    )
     suspend fun searchByName(search: String): List<DrinkEntity>
 
     @Query(
