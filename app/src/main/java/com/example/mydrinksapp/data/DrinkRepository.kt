@@ -1,5 +1,6 @@
 package com.example.mydrinksapp.data
 
+import android.util.Log
 import com.example.mydrinksapp.data.database.dao.DrinkDao
 import com.example.mydrinksapp.data.database.dao.IngredientDao
 import com.example.mydrinksapp.data.database.entities.DrinkEntity
@@ -7,7 +8,9 @@ import com.example.mydrinksapp.data.database.entities.IngredientEntity
 import com.example.mydrinksapp.data.database.entities.toDatabase
 import com.example.mydrinksapp.data.network.DrinkService
 import com.example.mydrinksapp.domain.model.Drink
+import com.example.mydrinksapp.domain.model.DrinkDetail
 import com.example.mydrinksapp.domain.model.toDomain
+import com.example.mydrinksapp.domain.model.toMapper
 import javax.inject.Inject
 
 class DrinkRepository @Inject constructor(
@@ -18,9 +21,7 @@ class DrinkRepository @Inject constructor(
 
     suspend fun getAllDrinks(): List<Drink> {
         val drinks = getAllDrinksFromDatabase()
-
         if (drinks.isNotEmpty()) return drinks
-
         return getAllDrinksFromApi()
     }
 
@@ -68,5 +69,11 @@ class DrinkRepository @Inject constructor(
         val result = drinkDao.searchByName(search).map(DrinkEntity::toDomain)
         if (result.isEmpty()) throw Exception()
         return result
+    }
+
+    suspend fun getDrinkById(drinkId: Int): DrinkDetail {
+        val drinkDetail = drinkDao.getDrinkDetail(drinkId)
+        if (drinkDetail.isEmpty()) throw Exception()
+        return drinkDetail.toMapper()
     }
 }

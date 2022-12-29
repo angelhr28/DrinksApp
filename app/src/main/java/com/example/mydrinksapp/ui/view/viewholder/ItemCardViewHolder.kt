@@ -23,7 +23,7 @@ class ItemCardViewHolder(private val binding: ItemCardBinding) :
 
     @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.N)
-    fun bind(drink: Drink, listener: (String) -> Unit) {
+    fun bind(drink: Drink, listener: (Int) -> Unit) {
         binding.apply {
             title.text = drink.name
             desc.text = drink.instructions
@@ -34,7 +34,7 @@ class ItemCardViewHolder(private val binding: ItemCardBinding) :
 
             desc.text = drink.instructions
             root.setOnClickListener {
-                listener(drink.img ?: "")
+                listener(drink.id ?: 0)
             }
         }
     }

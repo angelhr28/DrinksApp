@@ -20,51 +20,21 @@
             android:id="@+id/tbMain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:menu="@menu/menu"
-            app:title="Recetas"
             app:titleTextColor="@color/black" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipeRefresh"
+    <fragment
+        android:id="@+id/navHostFragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         android:layout_height="0dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/abMain">
+        app:defaultNavHost="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintTop_toBottomOf="@+id/abMain" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvItems"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            tools:listitem="@layout/item_card" />
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-    <TextView
-        android:id="@+id/txtEmpty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/sin_resultados"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ProgressBar
-        android:id="@+id/progress"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

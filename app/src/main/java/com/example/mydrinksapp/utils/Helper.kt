@@ -10,6 +10,9 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import com.google.gson.Gson
 import java.text.SimpleDateFormat
 import java.time.format.DateTimeFormatter
@@ -86,4 +89,10 @@ fun View.hideKeyboard() {
     val inputMethodManager =
         context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
     inputMethodManager.hideSoftInputFromWindow(this.windowToken, 0)
+}
+
+fun Fragment.safeNavigateFromNavController(directions: NavDirections) = with(findNavController()) {
+    currentDestination?.getAction(directions.actionId)?.let {
+        navigate(directions)
+    }
 }
